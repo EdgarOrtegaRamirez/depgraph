@@ -101,7 +101,7 @@ src/depgraph/
 - **BFS Traversal**: Level-order traversal for depth/breadth metrics
 - **Topological Sort**: Kahn's algorithm for dependency ordering
 - **Impact Scoring**: Reverse BFS to calculate blast radius
-- **Import Analysis**: Python AST parsing + JS/Go regex import extraction
+- **Import Analysis**: AST parsing via tree-sitter (Python ast, JS/TS tree-sitter-javascript/typescript, Go tree-sitter-go) with regex fallback
 
 ## Testing
 

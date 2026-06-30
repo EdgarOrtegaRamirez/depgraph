@@ -24,7 +24,20 @@ dependencies = []
 depgraph = "depgraph.cli:main"
 
 [project.optional-dependencies]
+js = [
+    "tree-sitter>=0.23.0",
+    "tree-sitter-javascript>=0.23.0",
+    "tree-sitter-typescript>=0.23.0",
+]
+go = [
+    "tree-sitter>=0.23.0",
+    "tree-sitter-go>=0.23.0",
+]
+all-parsers = [
+    "depgraph[js,go]",
+]
 dev = [
+    "depgraph[all-parsers]",
     "pytest>=8.0.0",
     "pytest-cov>=6.0.0",
     "ruff>=0.15.0",
