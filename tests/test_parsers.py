@@ -53,7 +53,7 @@ class TestRequirementsParser:
 
     def test_parse_with_extras(self, tmp_dir: Path) -> None:
         req_file = tmp_dir / "requirements.txt"
-        req_file.write_text('requests[security]\n')
+        req_file.write_text("requests[security]\n")
 
         parser = RequirementsParser()
         deps, _ = parser.parse(req_file)

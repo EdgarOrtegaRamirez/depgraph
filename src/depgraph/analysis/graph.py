@@ -33,9 +33,7 @@ class DependencyGraph:
         if edge.source not in self._nodes:
             target_dep = self._nodes.get(edge.target)
             eco = target_dep.ecosystem if target_dep else Ecosystem.PIP
-            self._nodes[edge.source] = Dependency(
-                name=edge.source, version="*", ecosystem=eco
-            )
+            self._nodes[edge.source] = Dependency(name=edge.source, version="*", ecosystem=eco)
 
     @property
     def nodes(self) -> dict[str, Dependency]:
@@ -174,11 +172,13 @@ class DependencyGraph:
         conflicts = []
         for name, versions in name_versions.items():
             if len(versions) > 1:
-                conflicts.append({
-                    "package": name,
-                    "versions": sorted(versions),
-                    "count": len(versions),
-                })
+                conflicts.append(
+                    {
+                        "package": name,
+                        "versions": sorted(versions),
+                        "count": len(versions),
+                    }
+                )
 
         return conflicts
 

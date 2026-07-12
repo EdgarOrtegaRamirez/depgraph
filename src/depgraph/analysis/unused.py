@@ -331,7 +331,12 @@ def find_unused(
             if ecosystem == Ecosystem.PIP and file_path.suffix == ".py":
                 all_imports |= _extract_imports_from_file(file_path)
             elif ecosystem in (Ecosystem.NPM, Ecosystem.YARN, Ecosystem.PNPM) and file_path.suffix in (
-                ".js", ".ts", ".jsx", ".tsx", ".mjs", ".cjs"
+                ".js",
+                ".ts",
+                ".jsx",
+                ".tsx",
+                ".mjs",
+                ".cjs",
             ):
                 all_imports |= _extract_imports_from_js(file_path)
             elif ecosystem == Ecosystem.GO and file_path.suffix == ".go":

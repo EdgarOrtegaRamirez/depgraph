@@ -75,12 +75,30 @@ class PyProjectParser(BaseParser):
     ecosystem = Ecosystem.PIP
 
     # Fields to skip (metadata, not dependencies)
-    META_FIELDS = frozenset({
-        "name", "version", "description", "readme", "license", "requires-python",
-        "authors", "maintainers", "keywords", "classifiers", "urls",
-        "optional-dependencies", "project", "build-system", "tool", "scripts",
-        "entry-points", "gui-scripts", "console-scripts", "dynamic",
-    })
+    META_FIELDS = frozenset(
+        {
+            "name",
+            "version",
+            "description",
+            "readme",
+            "license",
+            "requires-python",
+            "authors",
+            "maintainers",
+            "keywords",
+            "classifiers",
+            "urls",
+            "optional-dependencies",
+            "project",
+            "build-system",
+            "tool",
+            "scripts",
+            "entry-points",
+            "gui-scripts",
+            "console-scripts",
+            "dynamic",
+        }
+    )
 
     def parse(self, file_path: Path, root_package: str | None = None) -> tuple[list[Dependency], list[Edge]]:
         deps: list[Dependency] = []
@@ -97,7 +115,7 @@ class PyProjectParser(BaseParser):
             stripped = line.strip()
 
             # Detect start of dependencies array (handles multi-line and single-line)
-            if not in_deps_array and re.match(r'^dependencies\s*=\s*\[', stripped):
+            if not in_deps_array and re.match(r"^dependencies\s*=\s*\[", stripped):
                 in_deps_array = True
                 bracket_depth = stripped.count("[") - stripped.count("]")
 
@@ -145,7 +163,7 @@ class PyProjectParser(BaseParser):
             line = line[1:-1]
         # Remove comments
         if "#" in line:
-            line = line[:line.index("#")].strip()
+            line = line[: line.index("#")].strip()
         # Must look like a package name
         if re.match(r"^[A-Za-z0-9]", line):
             # Strip version constraint
@@ -160,7 +178,7 @@ class PyProjectParser(BaseParser):
         self, line: str, deps: list[Dependency], edges: list[Edge], root_package: str | None
     ) -> None:
         """Parse a single-line dependencies array."""
-        match = re.search(r'dependencies\s*=\s*\[(.+)\]', line)
+        match = re.search(r"dependencies\s*=\s*\[(.+)\]", line)
         if not match:
             return
 

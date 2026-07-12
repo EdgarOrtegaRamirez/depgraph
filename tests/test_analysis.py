@@ -94,6 +94,7 @@ class TestHealthScorer:
 
     def test_health_score_grades(self) -> None:
         from depgraph.models import HealthScore
+
         # Test grade boundaries
         assert HealthScore.from_score(95).grade == "A+"
         assert HealthScore.from_score(90).grade == "A"
